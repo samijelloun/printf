@@ -1,37 +1,31 @@
 #include "main.h"
+#include <stdio.h>
 /**
- * print_rot13 - convert to rot13
- * @args: printf arguments
- * Return: counter
- *
- */
-int print_rot13(va_list args)
+  * print_rot13 - encodes a string into rot13.
+  * @R: string to convert
+  * Return: size the output text
+  */
+int print_rot13(va_list R)
 {
-	int i, j, counter = 0;
-	int k = 0;
-	char *s = va_arg(args, char*);
-	char al[] = {"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"};
-	char bl[] = {"nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM"};
+	int j, i, count = 0;
+	char *r;
+	char input[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz";
+	char output[] = "NOPQRSTUVWXYZABCDEFGHIJKLM nopqrstuvwxyzabcdefghijklm";
 
-	if (s == NULL)
-		s = "(null)";
-	for (i = 0; s[i]; i++)
+	r = va_arg(R, char *);
+	if (r == NULL)
+		r = "(null)";
+	for (j = 0; r[j] != '\0'; j++)
 	{
-		k = 0;
-		for (j = 0; al[j] && !k; j++)
+		for (i = 0; input[i] != '\0'; i++)
 		{
-			if (s[i] == al[j])
+			if (r[j] == input[i])
 			{
-				_putchar(bl[j]);
-				counter++;
-				k = 1;
+				_putchar(output[i]);
+				count++;
+				break;
 			}
 		}
-		if (!k)
-		{
-			_putchar(s[i]);
-			counter++;
-		}
 	}
-	return (counter);
+	return (count);
 }
